@@ -1,0 +1,51 @@
+ /*  Author: Khadija Zafar
+  Course: CST8285_302
+  Professor: Alem Legesse
+  File: index.html
+
+  Description: this file contains all the styling done to the webpage.   */
+ /* 
+ all the styling for heading h1
+  */
+ h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  color:white;
+  font-size: 50px;
+  text-align: center;
+
+}
+/* class centre styling */
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+/* styling for the image on home page */
+#centre img{
+margin-left: auto;
+margin-right: auto;
+float: right;
+width: 300px;
+height: 50%;
+position:relative;
+top: -200px;
+margin-right: 50px;
+}
+/* styling for the paragraph on home page */
+div{
+  color: white;
+  text-align: center;
+  display: block;
+  font-style:oblique;
+  
+}
+/* styling for class centre */
+.center{
+  width: 100px;
+  height: 100px;
+  float: right;
+  position: relative;
+  top:-50px;
+}
+

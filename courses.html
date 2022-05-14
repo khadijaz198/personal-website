@@ -1,0 +1,514 @@
+<!--
+  Author: Khadija Zafar
+  Course: CST8285_302
+  Professor: Alem Legesse
+  File: courses.html
+
+  Description: this file displays courses of level 1 and level 2. For formatting purposes, some part of css and javascript is added to html. 
+  -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/0fe5d5ecba.js" crossorigin="anonymous"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<title>Khadija Personal Site</title>
+<link rel="stylesheet"  href="style.css">
+ 
+<!-- styling is performed for navigation bar -->
+<style>
+body {
+  font-family: "Lato", sans-serif;
+  background-color: lightgrey;
+  background-image: url("nc.jpg");
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.6s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 35px;
+  margin-left: 51px;
+}
+.sidenav img{
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  padding: 10%;
+  padding-bottom: 4%;	
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+* {
+  box-sizing: border-box;
+}
+/* Styling performed for autocomplete search bar */
+body {
+  font: 20px Arial; 
+  color: white; 
+}
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: white;
+  width: 50%;
+  float: left;
+  height: 30px;
+}
+
+input[type=submit] {
+  background-color: white;
+  color:black;
+  cursor: pointer;
+  float: left;
+  width: 80px;
+  height: 30px;
+  border: 50%;
+  display: inline-block;
+  padding: 5px;
+  
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: grey; 
+  border-bottom: 1px solid darkslategrey; 
+}
+
+/* when hovering an item: */
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: Darkgrey; 
+  color: #ffffff; 
+}
+.dropbtn {
+  background-color: grey;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  display: inline-block;
+  padding: 5px
+}
+.sort{
+  background-color: grey;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 60px;
+  height: 50px;
+  display: inline-block;
+  padding: 5px;
+  list-style-type: none;
+}
+ul.no-bullets {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: grey;
+}
+
+#myInput {
+  box-sizing: border-box;
+  background-image: url('searchicon.png');
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 14px 20px 12px 45px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {outline: 3px solid #ddd;}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+  
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+</style>
+</head>
+<body>
+  <!-- search bar in included below. -->
+  <div id="sideNavi" class="sidenav">
+    <div class="search-container">
+      <form autocomplete="off" action="/action_page.php">
+          <div class="autocomplete" style="width:300px;">
+        <input id="myInput" type="text" placeholder="Search.." name="search">
+        <input type="submit" style="margin: 2px; margin-top: 0.3px;">
+      </div>
+      
+      </form>
+    </div>
+    <!-- dropdown menu to filter through the courses. -->
+    <div class="dropdown">
+      <button onclick="myFunction()" class="dropbtn">Filter: Course by Level</button>
+      <div id="myDropdown" class="dropdown-content">
+        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+        <a href="courses.html">CST8215</a>
+        <a href="courses.html">MAT8001C</a>
+        <a href="courses.html">CST8101</a>
+        <a href="courses.html">CST8300</a>
+        <a href="courses.html">CST8116</a>
+        <a href="courses.html">CST8284</a>
+        <a href="courses.html">CST8285</a>
+        <a href="courses.html">CST2355</a>
+        <a href="courses.html">CST8102</a>
+       
+      </div>
+    </div>
+  <!-- Addition of Navigation bar on the page. -->
+      <img src="logo.jpg" alt="logo">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <a class="active" href="index.html">Home</a>
+          <a href="resume.html">Resume</a>
+          <a href="courses.html">Courses</a>
+    </div>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+<!-- sorting feature is added to sort the course by level. -->
+  <div class="sorting">
+      <button class="sort" onclick="sortList()">Sort</button>
+    <ul id="idSort" class="no-bullets">
+        <li>Introduction to Database</li>
+        <li>Tech Math for Computer Science</li>
+        <li>Achieving Succes in Changing Environment</li>
+        <li>Computer Essentials</li>
+        <li>Operating System FUND (LINUX/GNU)</li>
+        <li>Introduction to Computer Programming</li>
+        <li>Database Systems</li>
+        <li> Web Programming</li>
+  
+  
+    </ul>
+</div>
+<!-- Below is the list of courses with course code, level and course name. -->
+<h3>Level 1 (CST8215)-Introduction to Database</h3>
+            <img src="introToData.PNG" alt="Introduction to Database" class="center">
+        <p>You will learn about Database Management System by practicing SQL
+            queries, drawing Entity Relationship Diagrams. You will be creating 
+            databases using the concept of Normalization
+            and be able to maintain and modify the databases. 
+        </p>
+        
+        <hr>
+        <h3>Level 1 (CST8116)-Introduction to Computer Programming</h3>
+            <img src="introToCompProg.PNG" alt="Introduction to Computer Programming" class="center">
+        <p>This course is about understanding the basic fundamentals of programming. As a student, 
+            you get to develop basic knowledge of how to write programs, create pseudocode, flowcharts
+            and practice Java Programming language. You will also learn about constructors, variables, one-dimensional array,
+            inputs/outputs, abstraction, encapsulation and inheritance. 
+        </p>
+        <hr>
+        <h3>Level 1 (CST8300) Achieving Succes in Changing Environment</h3>
+            <img src="AchieSuccess.PNG" alt="Achieving Success in Changing Environment" class="center">
+        <p>Teaches about changes in technology that is challenging us to find our place in the industry. This course teaches about 
+            applying critical thinking and decision-making tools to help solve some of the important issues in the society with its competing interests. </p>
+
+            <hr>
+        <h3>Level 1 (CST8101) Computer Essentials</h3>
+            <img src="CompEssen.PNG" alt="Computer Essentials" class="center">
+        <p>This course teaches about the software, hardware and different components about laptop.
+            It helps to develop technical programming skills as well as gain knowledge about basic materials and troubleshoot different
+            problems that occur in computer system. You get to learn how to create backups, manage files,
+            protect computer from viruses. 
+        </p>
+        <hr>
+        <h3>Level 1 (MAT8001C) Tech Math for Computer Science</h3>
+            <img src="TechMath.PNG" alt="Tech Math for Computer Science" class="center">
+        <p>This course is about algebraic and transcendental functions that are prerequisite 
+            to Calculus. Students learn to perform
+             algebraic expressions, solve algebraic equations and linear systems 
+             and learn the properties of algebraic and transcendental 
+             functions. It will cover computer number systems in addition 
+             to Boolean algebra and logic to help solve problems involving computer systems. 
+             The course also teaches the addition and subtraction of vectors using vector components. 
+         </p>
+         <h3>Level 2 Courses List</h3>
+         <ul>
+           <li>(CST8102) Operating System FUND (LINUX/GNU)</li>
+           <li>(CST8284) Object-Oriented Programming</li>
+           <li>(CST2355) Database Systems</li>
+           <li>(CST8285) Web Programming</li>
+         </ul>
+<!--Each page has same header and footer (which includes contact email address)-->
+    <footer>
+        <p>Author: Khadija Zafar<br>
+        <a href="mailto:">zafa0003@algonquinlive.com</a></p>
+      </footer>
+     
+<script>
+    function openNav() {
+      document.getElementById("sideNavi").style.width = "250px";
+}
+
+    function closeNav() {
+      document.getElementById("sideNavi").style.width = "0";
+}
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+}
+    function autocomplete(Inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+      var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+    Inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              Inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  Inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 50) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActiv(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActiv(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+function addActiv(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActiv(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActiv(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != Inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when user clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeLists(e.target);
+  });
+}
+
+/*An array containing all the item names in the webpage:*/
+var words = ["course","CST8102","CST8284","CST8285","Resume","Home","Level 1","Level 2","Programming","Database","Linux","TechMath","Achieving","Web Programming"];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the words array to autocomplete values:*/
+  autocomplete(document.getElementById("myInput"), words);
+  function addClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+    }
+  }
+  
+  function removeClass(element, name) {
+    var i, arr1, arr2;
+    arr1 = element.className.split(" ");
+    arr2 = name.split(" ");
+    for (i = 0; i < arr2.length; i++) {
+      while (arr1.indexOf(arr2[i]) > -1) {
+        arr1.splice(arr1.indexOf(arr2[i]), 1);     
+      }
+    }
+    element.className = arr1.join(" ");
+  }
+  
+  // Add active class to the current button (highlight it)
+  var btnContainer = document.getElementById("myBtnContainer");
+  var btns = btnContainer.getElementsByClassName("btn");
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function(){
+      var current = document.getElementsByClassName("active");
+      current[0].className = current[0].className.replace(" active", "");
+      this.className += " active";
+    });
+  }
+  function sortList() {
+    var list, i, switching, b, shouldSwitch;
+    list = document.getElementById("idSort");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // start by saying: no switching is done:
+      switching = false;
+      b = list.getElementsByTagName("LI");
+      // Loop through all list-items:
+      for (i = 0; i<(b.length - 1); i++) {
+        // start by saying there should be no switching:
+        shouldSwitch = false;
+        /* check if the next item should
+        switch place with the current item: */
+        if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+          /* if next item is alphabetically
+          lower than current item, mark as a switch
+          and break the loop: */
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark the switch as done: */
+        b[i].parentNode.insertBefore(b[i + 1], b[i]);
+        switching = true;
+      }
+    }
+  }
+</script>
+  <div style="padding-left:16px"></div>
+  
+</script>
+<div style="padding-left:16px"></div>
+   
+</body>
+</html> 
